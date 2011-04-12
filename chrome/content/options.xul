@@ -10,9 +10,7 @@
     ondialogaccept="apptabinitHelper.savePreferences();">
   <vbox>
     <button label="&grabAppTabsButton.label;" oncommand="apptabinitHelper.grabAppTabs();"/>
-     <label value="Preferred App Tabs:"/>
-     <listbox id="uriListBox" width="400">
-     </listbox>
+      <listbox id="uriListBox" width="400"/>
   </vbox>
   <script src="options.js"/>
 </dialog>
