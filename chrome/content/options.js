@@ -1,29 +1,16 @@
-var apptabinitHelper = {
-    ListPrefName : "extensions.apptabinitializer.urilist",
+var apptabinitializerOptions = {
+
     ListBoxName : "uriListBox",
-
-    // Services
-
-    getMainWindow : function() {
-        var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
-                .getService(Components.interfaces.nsIWindowMediator);
-        return wm.getMostRecentWindow("navigator:browser");
-    },
-
-    getPrefManager : function() {
-        return Components.classes["@mozilla.org/preferences-service;1"]
-                .getService(Components.interfaces.nsIPrefBranch);
-    },
 
     // Event handlers
 
     loadPreferences : function() {
-        this.fillListBox(this.getURIListPreference());
+        this.fillListBox(apptabinitializerPreferences.getURIList());
     },
 
     savePreferences : function() {
         var str = this.getListBoxContentAsString();
-        this.getPrefManager().setCharPref(this.ListPrefName, str);
+        apptabinitializerPreferences.setURIList(str);
         return true;
     },
 
@@ -33,26 +20,12 @@ var apptabinitHelper = {
         this.fillListBox(uriList);
     },
 
-    // Preferences
+    // Services
 
-    getURIListPreference : function() {
-        var pm = this.getPrefManager();
-        if (pm.getPrefType(this.ListPrefName) == pm.PREF_STRING) {
-            var str = pm.getCharPref(this.ListPrefName);
-            if (str.length != 0) {
-                return str.split(',');
-            }
-        }
-        return [];
-    },
-
-    isResumeSessionOnce : function() {
-        const ResumePref = "browser.sessionstore.resume_session_once";
-        var pm = this.getPrefManager();
-        if (pm.getPrefType(ResumePref) == pm.PREF_BOOL) {
-            return pm.getBoolPref(ResumePref);
-        }
-        return false;
+    getMainWindow : function() {
+        var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
+                .getService(Components.interfaces.nsIWindowMediator);
+        return wm.getMostRecentWindow("navigator:browser");
     },
 
     // Browser
@@ -64,7 +37,7 @@ var apptabinitHelper = {
             var tab = tabbrowser.tabContainer.childNodes[i];
             if (tab.pinned) {
                 var currentBrowser = tabbrowser.getBrowserAtIndex(i);
-                uriList[uriList.length] = currentBrowser.currentURI.spec;
+                uriList.push(currentBrowser.currentURI.spec);
             }
         }
         return uriList;

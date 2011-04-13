@@ -6,12 +6,12 @@
     title="&prefwindow.title;"
     buttons="accept, cancel"
     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-    onload="apptabinitHelper.loadPreferences();" 
-    ondialogaccept="apptabinitHelper.savePreferences();">
+    onload="apptabinitializerOptions.loadPreferences();" 
+    ondialogaccept="apptabinitializerOptions.savePreferences();">
   <vbox>
-    <button label="&grabAppTabsButton.label;" oncommand="apptabinitHelper.grabAppTabs();"/>
+    <button label="&grabAppTabsButton.label;" oncommand="apptabinitializerOptions.grabAppTabs();"/>
       <listbox id="uriListBox" width="400"/>
   </vbox>
   <script src="options.js"/>
+  <script src="preferences.js"/>
 </dialog>
-

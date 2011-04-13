@@ -2,5 +2,5 @@
 <?xml-stylesheet href="chrome://apptabinitializer/skin/overlay.css" type="text/css"?>
 <overlay id="apptabinitializer-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
   <script src="overlay.js"/>
-  <script src="options.js"/>
+  <script src="preferences.js"/>
 </overlay>
